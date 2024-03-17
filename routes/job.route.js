@@ -11,10 +11,12 @@ const {
   postJob,
   updateJob,
   getJob,
+  getFilteredJobs,
 } = require("../controllers/job.controller.js");
 
 // contains all the routes to the API
 router.get("/", getJobs);
+router.get("/search", getFilteredJobs);
 router.get("/:id", getJob);
 router.delete("/:id", deleteJob);
 router.post("/", postJob);

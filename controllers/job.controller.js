@@ -10,6 +10,33 @@ const getJobs = async (req, res) => {
   }
 };
 
+// get filtered jobs
+const getFilteredJobs = async (req, res) => {
+  try {
+    const searchTerm = req.query.searchTerm; // Extracting the search term from the query parameters
+
+    const jobs = await Job.find({
+      $or: [
+        { title: { $regex: new RegExp(searchTerm, "i") } }, // Search in the "title" field
+        { company: { $regex: new RegExp(searchTerm, "i") } }, // Search in the "company" field
+        { description: { $regex: new RegExp(searchTerm, "i") } }, // Search in the "description" field
+        { skills: { $regex: new RegExp(searchTerm, "i") } }, // Search in the "skills" field
+        { location: { $regex: new RegExp(searchTerm, "i") } }, // Search in the "location" field
+        { salary: { $regex: new RegExp(searchTerm, "i") } }, // Search in the "salary" field
+        { applylink: { $regex: new RegExp(searchTerm, "i") } }, // Search in the "applylink" field
+        { type: { $regex: new RegExp(searchTerm, "i") } }, // Search in the "type" field
+        { role: { $regex: new RegExp(searchTerm, "i") } }, // Search in the "role" field
+        { applicationDeadline: { $regex: new RegExp(searchTerm, "i") } }, // Search in the "applicationDeadline" field
+        // Add more fields as needed
+      ],
+    });
+
+    res.status(200).json(jobs);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // get selected job
 const getJob = async (req, res) => {
   try {
@@ -69,4 +96,5 @@ module.exports = {
   postJob,
   updateJob,
   getJob,
+  getFilteredJobs,
 };

@@ -54,6 +54,12 @@ const JobSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    jobTag: {
+      type: String,
+    },
+    companyLogo: {
+      type: String,
+    },
   },
   {
     timestamps: true,
