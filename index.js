@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const Job = require("./model/job.model.js");
 const jobRoute = require("./routes/job.route.js");
 const app = express();
+const cors = require("cors");
+app.use(cors());
 require("dotenv").config();
 
 // middlewares
